@@ -8,10 +8,21 @@ const END_POINT = "http://localhost:3000/";
 function getAllUsers() {
   fetch(END_POINT + "all")
     .then((res) => res.json())
-    .then((users) => addUsersToTable(users));
+    .then((users) => renderUsers(users));
 }
 
-function addUsersToTable(users) {
+// delete function
+function deleteUser(id) {
+  console.log("in");
+  fetch(END_POINT + `delete/${id}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then(renderUsers);
+}
+
+// need to add something
+function renderUsers(users) {
   console.log(users);
   const usersElement = users.map(
     (user) => `
@@ -20,6 +31,7 @@ function addUsersToTable(users) {
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.age}</td>
+            <td><span onclick="deleteUser('${user.id}')">X</span></td>
         </tr>
     `
   );
@@ -43,7 +55,7 @@ formElement.onsubmit = (e) => {
     body: JSON.stringify(body),
   })
     .then((res) => res.json())
-    .then((data) => addUsersToTable(data));
+    .then((data) => renderUsers(data));
 };
 
 window.addEventListener("DOMContentLoaded", getAllUsers);

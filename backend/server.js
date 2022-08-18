@@ -39,4 +39,11 @@ app.post("/create", (req, res) => {
   res.json(users);
 });
 
+app.delete("/delete/:id", (req, res) => {
+  console.log("params", req.params.id);
+  const deletedIndex = users.findIndex((user) => user.id == req.params.id);
+  users.splice(deletedIndex, 1);
+  res.json(users);
+});
+
 app.listen(3000, () => console.log("Running on 3000"));

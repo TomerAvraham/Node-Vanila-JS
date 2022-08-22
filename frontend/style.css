@@ -17,3 +17,22 @@ table {
   width: 80vw;
   border: 2px solid blue;
 }
+
+.edit-modal {
+  position: absolute;
+  top: 50%; right: 50%;
+  transform: translate(50%,-50%);
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.edit-modal > form {
+  background-color: #fff;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+}
